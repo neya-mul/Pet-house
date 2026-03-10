@@ -1,4 +1,5 @@
 let buttonContainer = document.getElementById('button-container')
+let cards = document.getElementById('cards')
 
 // function for loading all pets catagorie
 const loadPetsCategorie = () => {
@@ -15,6 +16,7 @@ const displayPetCategorie = (catagorie) => {
         // console.log(type);
         let btn = document.createElement('button')
         btn.className = ' border border-gray-300 rounded mx-auto w-[200px] px-8 py-2 flex gap-1 items-center'
+        btn.onclick = () => loadAllPets(type.category)
         // btn.onclick = () => loadAllPets(type.category)
         btn.innerHTML = `
          <img src="${type.category_icon}" alt="">
@@ -23,6 +25,46 @@ const displayPetCategorie = (catagorie) => {
         buttonContainer.appendChild(btn)
 
     });
+
+}
+
+
+// function for load all pets
+
+const loadAllPets = (category) => {
+
+    console.log(category);
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+        .then(res => res.json())
+        .then(data => displayPets(data.data))
+}
+
+
+// function for display cards
+const displayPets = (pets) => {
+    cards.innerHTML = ''
+    pets.forEach(pet => {
+        // console.log(pet)
+        let card = document.createElement('div')
+        card.className = 'card w-full p-3 border border-gray-300 mx-auto'
+
+        card.innerHTML = `
+         <img src="${pet.image}" class="mx-auto" alt="">
+                        <h1 class="text-2xl font-bold">${pet.pet_name}</h1>
+                        <p>Breed:<span id="breed">${pet.breed ? pet.breed : 'Breed not found'}</span></p>
+                        <p>Birth:<span id="birth">${pet.date_of_birth ? pet.date_of_birth : "Date of Birth not found"}</span></p>
+                        <p>Gender<span id="gender">${pet.gender ? pet.gender : "Gender not Found"}</span></p>
+                        <p>Price: <span id="price">${pet.price ? pet.price : "price not found"}</span></p>
+                        <hr>
+                        <div class="flex justify-between my-3">
+                            <button class="border border-gray-300 rounded p-1"><i class="fa-regular fa-thumbs-up"></i></button>
+                            <button class="border border-gray-300 rounded p-1">Adopt</button>
+                            <button class="border border-gray-300 rounded p-1" id="details">Details</button>
+                        </div>
+        `
+        cards.appendChild(card)
+    });
+
 
 }
 
