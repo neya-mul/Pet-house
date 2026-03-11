@@ -64,6 +64,19 @@ const displayPets = (pets) => {
         `
         cards.appendChild(card)
     });
+    if (cards.children.length === 0) {
+
+        let div = document.createElement('div')
+        div.className = "w-full col-span-full mx-auto bg-gray-300 p-5 rounded"
+        div.innerHTML = `
+        <img src="./images/error.webp" alt="" class="mx-auto">
+            <h1 class="text-2xl font-bold text-center">No Information Available</h1> 
+            <p class="text-center">It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at
+                its layout. The point of using Lorem Ipsum is that it has a.</p>
+       `
+       cards.appendChild(div)
+    }
 
 
 }
