@@ -29,7 +29,7 @@ const displayPetCategorie = (catagorie) => {
         let btn = document.createElement('button')
         btn.className = ' border border-gray-300 rounded mx-auto w-[200px] px-8 py-2 flex gap-1 items-center'
         // btn.classList.add('bg-green-300')
-        btn.onclick = () => loadAllPets(type.category)
+        btn.onclick = () => loadAllPets(type.category, btn)
         // btn.onclick = () => loadAllPets(type.category)
         btn.innerHTML = `
          <img src="${type.category_icon}" alt="">
@@ -44,7 +44,13 @@ const displayPetCategorie = (catagorie) => {
 
 // function for load all pets
 
-const loadAllPets = (category) => {
+const loadAllPets = (category, button) => {
+        let buttons = buttonContainer.querySelectorAll('button')
+        buttons.forEach(btn => {
+            btn.classList.remove('bg-green-200', 'rounded')
+        });
+        button.classList.add('bg-green-200', 'rounded-3xl')
+        
 
 
     // console.log(category);
