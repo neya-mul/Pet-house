@@ -47,7 +47,7 @@ const displayPetCategorie = (catagorie) => {
 const loadAllPets = (category, button) => {
         let buttons = buttonContainer.querySelectorAll('button')
         buttons.forEach(btn => {
-            btn.classList.remove('bg-green-200', 'rounded')
+            btn.classList.remove('bg-green-200', 'rounded-3xl')
         });
         button.classList.add('bg-green-200', 'rounded-3xl')
         
